@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rest Country</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <h1>Rest Countries i am coming to youuuuuuu!</h1>
+    <div id="countries" class="countries"></div>
+
+    <script>
+        const loadCountries = () => {
+            fetch('https://restcountries.com/v3.1/all')
+                .then(res => res.json())
+                .then(data => displayCountries(data));
+        }
+
+        displayCountries = countries => {
+            console.log(countries[0])
+            countriesHTML = countries.map(country => getCountryHTML(country))
+            //console.log(countriesHTML[0])
+            const container = document.getElementById('countries');
+            container.innerHTML = countriesHTML.join(' ');
+        }
+
+        const getCountryHTML = country => {
+            return `
+                <div class="country">
+                    <h2>${country.name.common}</h2>
+                    <img src="${country.flags.png}">
+                </div>
+            `
+        }
+        loadCountries();
+    </script>
+
+</body>
+
+</html>
